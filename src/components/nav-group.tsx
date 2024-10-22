@@ -1,8 +1,7 @@
-import { ChevronRight, MoreHorizontal, Plus } from "lucide-react"
+import { ChevronRight, MoreHorizontal } from "lucide-react"
 
 import {
   Collapsible,
-  CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
 import {
@@ -13,12 +12,11 @@ import {
   SidebarMenuAction,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
 } from "@/components/ui/sidebar"
 
-function Link(item) {
+import { ISidebarItem } from "@/interfaces/sidebar-item.interfsace";
+
+function Link(item: ISidebarItem) {
   return ( <SidebarMenuItem key={item.name}>
              <SidebarMenuButton asChild>
                <a href={item.url} title={item.name}>
@@ -29,7 +27,7 @@ function Link(item) {
            </SidebarMenuItem>);
 }
 
-function ChildMenu(workspace) {
+function ChildMenu(workspace: ISidebarItem) {
   console.log("returning child menu link")
   return (<Collapsible key={workspace.name}>
     <SidebarMenuItem>
@@ -47,33 +45,27 @@ function ChildMenu(workspace) {
           <ChevronRight />
         </SidebarMenuAction>
       </CollapsibleTrigger>
-      <SidebarMenuAction showOnHover>
-        <Plus />
-      </SidebarMenuAction>
-      <CollapsibleContent>
-        <SidebarMenuSub>
-          {workspace.pages?.map((page) => (
-            <SidebarMenuSubItem key={page.name}>
-              <SidebarMenuSubButton asChild>
-                <a href="#">
-                  <span>{page.emoji}</span>
-                  <span>{page.name}</span>
-                </a>
-              </SidebarMenuSubButton>
-            </SidebarMenuSubItem>
-          ))}
-        </SidebarMenuSub>
-      </CollapsibleContent>
     </SidebarMenuItem>
   </Collapsible>)
 }
 
-function Menu(workspace) {
-  if (workspace.item.pages && workspace.item.pages.length >0) {
-    return ChildMenu(workspace.item);
+function Menu(item: ISidebarItem) {
+  if (item.pages && item.pages.length >0) {
+    return ChildMenu(item);
   } else {
-    return Link(workspace.item);
+    return Link(item);
   }
+}
+
+function ShowMore() {
+  return (
+    <SidebarMenuItem>
+    <SidebarMenuButton className="text-sidebar-foreground/70">
+      <MoreHorizontal />
+      <span>More</span>
+    </SidebarMenuButton>
+  </SidebarMenuItem>
+  )
 }
 
 export function NavGroup({
@@ -83,32 +75,15 @@ export function NavGroup({
 }: {
   name: string,
   showMore?: boolean,
-  items: {
-    name: string
-    emoji: React.ReactNode
-    url?: string
-    pages?: {
-      name: string
-      emoji: React.ReactNode
-    }[]
-  }[]
+  items: ISidebarItem[]
 }) {
   return (
     <SidebarGroup>
       <SidebarGroupLabel>{name}</SidebarGroupLabel>
       <SidebarGroupContent>
         <SidebarMenu>
-          {items.map((workspace) => (
-            <Menu key={workspace.name} item={workspace} />
-          ))}
-          {showMore && (
-            <SidebarMenuItem>
-              <SidebarMenuButton className="text-sidebar-foreground/70">
-                <MoreHorizontal />
-                <span>More</span>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          )}
+          {items.map((item) => Menu(item))}
+          {showMore && ShowMore()}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>

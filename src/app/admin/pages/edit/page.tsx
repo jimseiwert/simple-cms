@@ -1,30 +1,33 @@
 'use client';
-import React, {useState} from 'react';
-import {DndContext} from '@dnd-kit/core';
+import React, { useState } from 'react';
+import { DndContext, DragEndEvent } from '@dnd-kit/core';
 
-import {Draggable} from './Draggable';
-import {Droppable} from './Droppable';
+import { Draggable } from './Draggable';
+import { Droppable } from './Droppable';
 import AuthLayout from '@/app/layouts/auth';
 
 export default function EditPage() {
-    const containers = ['A', 'B', 'C'];
-  const [parent, setParent] = useState(null);
-  const draggableMarkup = (
-    <Draggable id="draggable">Drag me</Draggable>
-  );
+    const [isDropped, setIsDropped] = useState(false);
+    const draggableMarkup = (
+        <Draggable id="test">Drag me</Draggable>
+    );
+    return (
+        <AuthLayout>
+            <div className="mx-auto h-24 w-full max-w-3xl rounded-xl bg-muted/50" />
+            <div className="mx-auto h-full w-full max-w-3xl rounded-xl bg-muted/50">
+                <DndContext onDragEnd={handleDragEnd}>
+                    {!isDropped ? draggableMarkup : null}
+                    <Droppable id="droptest">
+                        {isDropped ? draggableMarkup : 'Drop here'}
+                    </Droppable>
+                </DndContext>
+            </div>
+        </AuthLayout>
+    );
 
-  return (
-    <AuthLayout>
-    <div className="mx-auto h-24 w-full max-w-3xl rounded-xl bg-muted/50" />
-    <div className="mx-auto h-full w-full max-w-3xl rounded-xl bg-muted/50" />
-    </AuthLayout>
-  );
-
-  function handleDragEnd(event) {
-    const {over} = event;
-
-    // If the item is dropped over a container, set it as the parent
-    // otherwise reset the parent to `null`
-    setParent(over ? over.id : null);
-  }
+    function handleDragEnd(event: DragEndEvent) {
+        if (event.over && event.over.id === 'droppable') {
+          setIsDropped(true);
+        }
+      }
 }
