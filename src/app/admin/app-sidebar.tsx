@@ -38,6 +38,11 @@ const items = [
     url: "#",
     icon: Settings,
   },
+  {
+    title: "Pages",
+    url: "/admin/pages/edit",
+    icon: Settings,
+  },
 ]
 
 export function AppSidebar() {
