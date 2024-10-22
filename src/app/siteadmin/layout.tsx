@@ -1,14 +1,19 @@
-export default function SiteAdminLayout({
-  children,
-  modal,
-}: {
-  children: React.ReactNode;
-  modal: React.ReactNode;
-}) {
-  return (
-    <div>
-        <span>Site Admin Layout</span>
-        {children}
-    </div>
-  );
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
+import { AppSidebar } from "./app-sidebar"
+
+export default function SiteLayout({
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    return (
+        <SidebarProvider>
+            <AppSidebar />
+            <div>
+                <SidebarTrigger />
+                {children}
+            </div>
+        </SidebarProvider>
+    );
 }
+

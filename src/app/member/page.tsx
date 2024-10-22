@@ -1,5 +1,7 @@
-import React from 'react';
-
-export default function Page() {
-  return <h1>Hello, Member page!</h1>
+export default function MemberPage() {
+    return (
+        <div>
+            <div>member page</div>
+        </div>
+    );
 }

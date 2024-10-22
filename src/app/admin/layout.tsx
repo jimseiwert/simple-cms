@@ -1,7 +1,7 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "./app-sidebar"
 
-export default function MemberLayout({
+export default function AdminLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;

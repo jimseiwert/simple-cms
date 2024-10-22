@@ -1,6 +1,5 @@
+import { ModeToggle } from "@/components/theme-switch";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { SimpleUploadButton } from "./simple-upload-button";
-import { SiteAdminButton } from "./site-admin-button";
 
 export function TopNav() {
   return (
@@ -12,8 +11,7 @@ export function TopNav() {
           <SignInButton />
         </SignedOut>
         <SignedIn>
-          <SiteAdminButton />
-          <SimpleUploadButton />
+          <ModeToggle />
           <UserButton />
         </SignedIn>
       </div>
