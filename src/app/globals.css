@@ -86,3 +86,10 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+
+.trash-icon {
+  /* Icon size will relative to font-size of .text-wrapper */
+  width: 2em;
+  height: 2em;
+}

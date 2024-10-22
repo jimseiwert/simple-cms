@@ -1,5 +1,5 @@
 import { ChevronRight, MoreHorizontal } from "lucide-react"
-
+import Link from "next/link"
 import {
   Collapsible,
   CollapsibleTrigger,
@@ -16,13 +16,13 @@ import {
 
 import { ISidebarItem } from "@/interfaces/sidebar-item.interfsace";
 
-function Link(item: ISidebarItem) {
+function MenuLink(item: ISidebarItem) {
   return ( <SidebarMenuItem key={item.name}>
              <SidebarMenuButton asChild>
-               <a href={item.url} title={item.name}>
+               <Link href={item.url ?? "#"} title={item.name}>
                  <span>{item.emoji}</span>
                  <span>{item.name}</span>
-               </a>
+               </Link>
              </SidebarMenuButton>
            </SidebarMenuItem>);
 }
@@ -32,10 +32,10 @@ function ChildMenu(workspace: ISidebarItem) {
   return (<Collapsible key={workspace.name}>
     <SidebarMenuItem>
       <SidebarMenuButton asChild>
-        <a href={workspace.url ?? "#"}>
+        <Link href={workspace.url ?? "#"}>
           <span>{workspace.emoji}</span>
           <span>{workspace.name}</span>
-        </a>
+        </Link>
       </SidebarMenuButton>
       <CollapsibleTrigger asChild>
         <SidebarMenuAction
@@ -53,7 +53,7 @@ function Menu(item: ISidebarItem) {
   if (item.pages && item.pages.length >0) {
     return ChildMenu(item);
   } else {
-    return Link(item);
+    return MenuLink(item);
   }
 }
 

@@ -15,9 +15,9 @@ import {
   Trash2,
 } from "lucide-react"
 
-import { NavMain } from "@/components/nav-main"
-import { NavGroup } from "@/components/nav-group"
-import { TeamSwitcher } from "@/components/team-switcher"
+import { NavMain } from "@/components/nav/nav-main"
+import { NavGroup } from "@/components/nav/nav-group"
+import { TeamSwitcher } from "@/components/nav/team-switcher"
 import {
   Sidebar,
   SidebarContent,
@@ -116,8 +116,18 @@ const data = {
   ],
   admin: [
     {
+      name: "General Settings",
+      url: "/admin/settings/general",
+      emoji: "💪",
+    },
+    {
       name: "Pages",
       url: "/admin/pages/dashboard",
+      emoji: "💪",
+    },
+    {
+      name: "Data",
+      url: "/admin/data/dashboard",
       emoji: "💪",
     },
     {

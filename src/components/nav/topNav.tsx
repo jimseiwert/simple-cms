@@ -1,4 +1,4 @@
-import { ModeToggle } from "@/components/theme-switch";
+import { ModeToggle } from "@/components/theme/theme-switch";
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 export function TopNav() {

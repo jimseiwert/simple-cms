@@ -4,7 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/ui/sonner"
-import { TopNav } from "../components/topNav";
+import { TopNav } from "../components/nav/topNav";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
